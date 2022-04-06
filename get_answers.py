@@ -16,7 +16,7 @@ for id in question_ids:
     }
     """
     
-    request_statement = "https://api.stackexchange.com/2.3/questions/" +str(id) +"/answers?order=desc&sort=activity&site=stackoverflow"
+    request_statement = "https://api.stackexchange.com/2.3/questions/" +str(id) +"/answers?order=desc&sort=activity&site=stackoverflow&filter=withbody"
     r = requests.get(request_statement)
     scraped_data = json.loads(r.text)
 

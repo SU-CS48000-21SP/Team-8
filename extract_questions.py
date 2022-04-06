@@ -8,8 +8,8 @@ params = {
     "type": jsontext
 }
 """
-# request_statement = "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&tagged=python&site=stackoverflow"
-request_statement = "https://api.stackexchange.com/2.3/tags/python/faq?site=stackoverflow"
+#request_statement = "https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=activity&tagged=python&site=stackoverflow"
+request_statement = "https://api.stackexchange.com/2.3/tags/python/faq?pagesize=20&site=stackoverflow&filter=withbody"
 
 r = requests.get(request_statement)
 
@@ -30,8 +30,8 @@ goal_file = "Desktop/CS 58005/stackoverflow_python_queries.csv"
 item = data["items"]
 
 fp = io.open(goal_file,"w", encoding = "utf-8")
-# 
-fp.write(' "tags","is_answered","view_count","answer_count","score","last_activity_date","creation_date","last_edit_date","question_id","content_license","link","title"\n')
+
+fp.write(' "tags","is_answered","view_count","answer_count","score","last_activity_date","creation_date","last_edit_date","question_id","content_license","link","title"\n') # ,"body"
 for i in range(len(item)):
         
         if "tags" in item[i]:
@@ -88,7 +88,11 @@ for i in range(len(item)):
                 title = str(item[i]["title"])
         else:
                 title = ""
-        fp.write( '"' + tags + '","' + is_answered + '","' + view_count + '","' + answer_count + '","' + score + '","' + last_activity_date  + '","' + creation_date + '","' + last_edit_date + '","' + question_id + '","' + content_license + '","' + link + '","' + title + '"\n')
+        if "body" in item[i]:
+                body = str(item[i]["body"])
+        else:
+                body = ""
+        fp.write( '"' + tags + '","' + is_answered + '","' + view_count + '","' + answer_count + '","' + score + '","' + last_activity_date  + '","' + creation_date + '","' + last_edit_date + '","' + question_id + '","' + content_license + '","' + link + '","' + title + '"\n') # + '","' + body
         # 
 f.close()
 fp.close()
