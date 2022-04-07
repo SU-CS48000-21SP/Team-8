@@ -6,9 +6,9 @@ import html_parser
 page_size = 100  # number of queries to be extracted in each call
 page_num = 1    # number of the page that will be extracted
 
-
+"""
 print("Extracting Python Queries")
-for page_num in range(1,25):
+for page_num in range(26,51):
         python_queries_json = "python_queries"+ str(page_num) +".json"
         f = open(python_queries_json, "w")
 
@@ -24,7 +24,7 @@ for page_num in range(1,25):
         json.dump(scraped_data, f)
 
         f.close()
-
+"""
 
 # Writing extracted data on a csv file
 print("Converting to .csv format" )
@@ -33,7 +33,7 @@ goal_file = "python_queries.csv"
 fp = io.open(goal_file,"a", encoding = "utf-8")
 fp.write(' "tags","is_answered","view_count","answer_count","score","last_activity_date","creation_date","last_edit_date","question_id","content_license","link","title","body","code"\n') # 
 
-for page_num in range(1,25):
+for page_num in range(1,26):
 
         python_queries_json = "python_queries"+ str(page_num) +".json"
         f_out = io.open(python_queries_json, encoding = "utf-8")
@@ -99,7 +99,6 @@ for page_num in range(1,25):
                         code = ""
                 fp.write( '"' + tags + '","' + is_answered + '","' + view_count + '","' + answer_count + '","' + score + '","' + last_activity_date  + '","' + creation_date + '","' + last_edit_date + '","' + question_id + '","' + content_license + '","' + link + '","' + title + '","' + body  + '","' + code +'"\n') #  
                 # 
-f.close()
 fp.close()
 
 

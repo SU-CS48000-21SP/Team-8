@@ -4,6 +4,7 @@ import html_parser
 
 # reading query.csv file onto a pandas csv object
 query_colnames = ["tags","is_answered","view_count","answer_count","score","last_activity_date","creation_date","last_edit_date","question_id","content_license","link","title","body","code"]
+#				   tags;  is_answered;  view_count;  answer_count;  score;  last_activity_date;  creation_date;  last_edit_date;  question_id;  content_license;  link;  title;  body;  code
 extracted_questions = "python_queries.csv"
 run_data = pandas.read_csv(extracted_questions,header=0,names=query_colnames)
 
@@ -12,6 +13,7 @@ question_ids=run_data.question_id.tolist()
 
 
 for id in question_ids:
+	print("Extracting the answers for query "+ str(id))
 	query_answers = "query_answers" + str(id) +".json"
 	request_statement = "https://api.stackexchange.com/2.3/questions/" +str(id) +"/answers?order=desc&sort=activity&site=stackoverflow&filter=withbody"
 	r = requests.get(request_statement)
