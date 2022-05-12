@@ -4,6 +4,7 @@ from nltk.tokenize import word_tokenize
 import csv
 from csv import reader
 import re
+
 #Extracts all the query titles and deletes stopwords for semantic similarity analysis
 print("Extracting Queries For NLP Preprocessing")
 
@@ -27,10 +28,11 @@ with open("python_queries.csv", "r", encoding= "utf-8") as f:
         f.close()
         #writing filtered queries to a new txt file
         filtered = [w for w in word_tokens if not w in stop_words] 
-        #f = open("filteredTitles.txt", "a")
-        # line = ''
-        # for word in filtered:
-        #     line += word + ' '
-        # f.write( line +"\n")
-        # f.close()
-        # line = ''
+        print(filtered)
+        f = open("filteredTitles.csv", "a")
+        line = ''
+        for word in filtered:
+            line += word + ' '
+        f.write( line +",")
+        f.close()
+        line = ''
