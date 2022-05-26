@@ -5,15 +5,20 @@ import html_parser
 
 page_size = 100  # number of queries to be extracted in each call
 page_num = 1    # number of the page that will be extracted
+api_key = "*zJ7yWEg0FQGbAIUV17t2Q(("
 
+json_dir = os.getcwd() + "/json_questions"
+if not os.path.exists(json_dir):
+    os.mkdir(json_dir)
 
 print("Extracting Python Queries")
-for page_num in range(1,25):
-        python_queries_json = "python_queries"+ str(page_num) +".json"
+"""
+for page_num in range(100,150):
+        python_queries_json = json_dir + "/python_queries"+ str(page_num) +".json"
         f = open(python_queries_json, "w")
 
         # requesting query data from stack exchange
-        request_statement = "https://api.stackexchange.com/2.3/tags/python/faq?page=" + str(page_num) + "&pagesize=" + str(page_size) + "&site=stackoverflow&filter=withbody"
+        request_statement = "https://api.stackexchange.com/2.3/tags/python/faq?page=" + str(page_num) + "&pagesize=" + str(page_size) + "&site=stackoverflow&key="+api_key+"&filter=withbody"
         r = requests.get(request_statement)
 
         print("Page: "+ str(page_num) )
@@ -24,7 +29,7 @@ for page_num in range(1,25):
         json.dump(scraped_data, f)
 
         f.close()
-
+"""
 
 # Writing extracted data on a csv file
 print("Converting to .csv format" )
@@ -33,9 +38,9 @@ goal_file = "python_queries.csv"
 fp = io.open(goal_file,"a", encoding = "utf-8")
 fp.write(' "tags","is_answered","view_count","answer_count","score","last_activity_date","creation_date","last_edit_date","question_id","content_license","link","title","body","code"\n') # 
 
-for page_num in range(1,25):
+for page_num in range(100,143):
 
-        python_queries_json = "python_queries"+ str(page_num) +".json"
+        python_queries_json =json_dir + "/python_queries"+ str(page_num) +".json"
         f_out = io.open(python_queries_json, encoding = "utf-8")
         queries = json.loads(f_out.read())
         
@@ -99,7 +104,6 @@ for page_num in range(1,25):
                         code = ""
                 fp.write( '"' + tags + '","' + is_answered + '","' + view_count + '","' + answer_count + '","' + score + '","' + last_activity_date  + '","' + creation_date + '","' + last_edit_date + '","' + question_id + '","' + content_license + '","' + link + '","' + title + '","' + body  + '","' + code +'"\n') #  
                 # 
-f.close()
 fp.close()
 
 

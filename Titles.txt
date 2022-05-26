@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  title
  how to make good reproducible pandas examples
  how to test multiple variables for equality against a single value
@@ -11775,6 +11776,8 @@
  how can i find all the subsets of a set with exactly n elements
  start a function at given time
  title
+=======
+>>>>>>> bc6ad81b5251cd8d42a5b59081dfa7a375d6793b
  how to make good reproducible pandas examples
  how to test multiple variables for equality against a single value
  asking the user for input until they give a valid response

@@ -9,10 +9,13 @@ run_data = pandas.read_csv(extracted_questions,header=0,names=query_colnames)
 
 # extracting the question_ids column onto a list
 question_ids=run_data.question_id.tolist()
-
+json_dir = os.getcwd() + "/json_answers"
+if not os.path.exists(json_dir):
+    os.mkdir(json_dir)
 
 for id in question_ids:
-	query_answers = "query_answers" + str(id) +".json"
+	print("Extracting the answers for query "+ str(id))
+	query_answers = json_dir+"/query_answers" + str(id) +".json"
 	request_statement = "https://api.stackexchange.com/2.3/questions/" +str(id) +"/answers?order=desc&sort=activity&site=stackoverflow&filter=withbody"
 	r = requests.get(request_statement)
 	scraped_data = json.loads(r.text)
@@ -29,7 +32,7 @@ fp.write('"is_accepted","score","last_activity_date","creation_date","answer_id"
 
 for id in question_ids:
 
-	answer_file = "query_answers" + str(id) +".json"
+	answer_file = json_dir+"/query_answers" + str(id) +".json"
 	f_out = io.open(answer_file, encoding = "utf-8")
 	answers = json.loads(f_out.read())
 

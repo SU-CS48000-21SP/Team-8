@@ -1,0 +1,5 @@
+ how to make a flat list out of a list of lists
+ flatten an irregular list of lists
+ transpose list of lists
+ how to sort a list of lists by a specific index of the inner list
+ join list of lists in python
